@@ -1,19 +1,21 @@
 {
   "name": "prisma-practice",
+  "license": "MIT",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "dependencies": {
-    "@prisma/client": "^2.17.0",
-    "express": "^4.17.1"
+    "dev": "ts-node ./script.ts"
   },
   "devDependencies": {
-    "prisma": "^2.17.0"
+    "@types/faker": "^5.1.7",
+    "prisma": "^2.17.0",
+    "ts-node": "^9.1.1"
+  },
+  "dependencies": {
+    "@prisma/client": "^2.18.0",
+    "express": "^4.17.1",
+    "faker": "^5.4.0"
+  },
+  "engines": {
+    "node": ">=10.0.0"
   }
 }

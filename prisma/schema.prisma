@@ -10,7 +10,7 @@ generator client {
 
 model Brand {
     id            Int    @id @default(autoincrement())
-    name          String
+    name          String @unique
     productsCount Int    @default(0)
 }
 
