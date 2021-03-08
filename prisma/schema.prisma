@@ -1,66 +1,64 @@
 datasource db {
-  provider = "mysql"
-//   url      = "mysql://default:secret@localhost:3307/prisma-practice"
-	url      = "mysql://default:secret@localhost:3307/prisma-practice"
+    provider = "mysql"
+    //   url      = "mysql://default:secret@localhost:3307/prisma-practice"
+    url      = "mysql://default:secret@localhost:3307/prisma-practice"
 }
+
 generator client {
-  provider = "prisma-client-js"
+    provider = "prisma-client-js"
 }
 
 model Brand {
-  id        Int     @id @default(autoincrement())
-  name     String
-  productsCount Int @default(0)
+    id            Int    @id @default(autoincrement())
+    name          String
+    productsCount Int    @default(0)
 }
 
 model Category {
-	id        Int     @id @default(autoincrement())
-	name     String	@db.VarChar(255) @default("")
-	parentId Int?
-	parent   Category?   @relation("CategoryTree", fields: [parentId], references: [id])
-	children Category[]   @relation("CategoryTree")
+    id       Int        @id @default(autoincrement())
+    name     String     @default("") @db.VarChar(255)
+    parentId Int?
+    parent   Category?  @relation("CategoryTree", fields: [parentId], references: [id])
+    children Category[] @relation("CategoryTree")
 }
 
 model Product {
-	id        Int     @id @default(autoincrement())
-	name     String
-	desc	String @db.Text()
-	price	Int
-	type ProductType @default(NORMAL)
-	images Json?
-	keywords Keyword[]
-	deals ProductsOnDeals[]
+    id       Int               @id @default(autoincrement())
+    name     String
+    desc     String            @db.Text
+    price    Int
+    type     ProductType       @default(NORMAL)
+    images   Json?
+    keywords Keyword[]
+    deals    ProductsOnDeals[]
 }
 
 enum ProductType {
-	NORMAL
-	SUPER
+    NORMAL
+    SUPER
 }
 
 model Keyword {
-	id        Int     @id @default(autoincrement())
-	name     String
-	products Product[]
+    id       Int       @id @default(autoincrement())
+    name     String
+    products Product[]
 }
 
 model Deal {
-	id        Int     @id @default(autoincrement())
-	name String
-	StartAt DateTime
-	EndAt DateTime
-	products ProductsOnDeals[]
+    id       Int               @id @default(autoincrement())
+    name     String
+    StartAt  DateTime
+    EndAt    DateTime
+    products ProductsOnDeals[]
 }
 
 model ProductsOnDeals {
-	deal	Deal @relation(fields: [dealId], references:[id])
-	dealId	Int
-	product	Product @relation(fields: [productId], references:[id])
-	productId	Int
-	additionalPrice Int @default(0)
-	createdAt   DateTime @default(now())
+    deal            Deal     @relation(fields: [dealId], references: [id])
+    dealId          Int
+    product         Product  @relation(fields: [productId], references: [id])
+    productId       Int
+    additionalPrice Int      @default(0)
+    createdAt       DateTime @default(now())
 
-	@@id([dealId, productId])
+    @@id([dealId, productId])
 }
-
-// productkeyword는 implicit
-// productdeal은 explicit
