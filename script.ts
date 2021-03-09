@@ -66,7 +66,7 @@ async function main() {
     deals.push(deal);
   }
 
-  for (const idx of Array(200).keys()) {
+  for (const idx of Array(10).keys()) {
     await prisma.product.create({
       data: {
         name: `product${idx}`,
