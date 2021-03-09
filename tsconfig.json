@@ -5,6 +5,7 @@
     "strict": true,
     "lib": ["esnext", "dom"],
     "esModuleInterop": true,
-    "downlevelIteration": true
+    "downlevelIteration": true,
+    "strictNullChecks": false
   }
 }

@@ -20,17 +20,20 @@ model Category {
     parentId Int?
     parent   Category?  @relation("CategoryTree", fields: [parentId], references: [id])
     children Category[] @relation("CategoryTree")
+    Product  Product[]
 }
 
 model Product {
-    id       Int               @id @default(autoincrement())
-    name     String
-    desc     String            @db.Text
-    price    Int
-    type     ProductType       @default(NORMAL)
-    images   Json?
-    keywords Keyword[]
-    deals    ProductsOnDeals[]
+    id         Int               @id @default(autoincrement())
+    category   Category?         @relation(fields: [categoryId], references: [id])
+    categoryId Int?
+    name       String
+    desc       String            @db.Text
+    price      Int
+    type       ProductType       @default(NORMAL)
+    images     Json?
+    keywords   Keyword[]
+    deals      ProductsOnDeals[]
 }
 
 enum ProductType {
@@ -47,8 +50,8 @@ model Keyword {
 model Deal {
     id       Int               @id @default(autoincrement())
     name     String
-    StartAt  DateTime
-    EndAt    DateTime
+    startAt  DateTime
+    endAt    DateTime
     products ProductsOnDeals[]
 }
 
